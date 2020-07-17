@@ -1,0 +1,69 @@
+<body>
+  <input type="text" id="hgs1" value="Quang">  nhap ten thang pro nhat<br>
+  <input type="text" id="hgs2" value="Duy">  nhap ten thang pro thu 2<br>
+  <input type="text" id="hgs3" value="Nghia">  nhap ten thang trinh` do trung binh<br>
+  <input type="text" id="hgs4" value="Hai">  nhap ten thang trung binh kem<br>
+  <input type="text" id="hgs5" value="Huy">  nhap ten thang ga<br>
+  <input type="text" id="hgs6" value="Khanh">  nhap ten thang ga nhat<br>
+<br>
+<br>
+bam de boc tham<br>
+<input type="button" id="demo" value="Boc tham chia bang">
+
+<script>
+document.getElementById("demo").onclick = function() {luckyDraw()};
+
+
+
+function randomArr(arr) {
+let randomNum = Math.floor(Math.random()*10000) % arr.length;
+return arr[randomNum];
+}
+
+function luckyDraw() {
+  let hgs1 = document.getElementById("hgs1").value;
+  let hgs2 = document.getElementById("hgs2").value;
+  let hgs3 = document.getElementById("hgs3").value;
+  let hgs4 = document.getElementById("hgs4").value;
+  let hgs5 = document.getElementById("hgs5").value;
+  let hgs6 = document.getElementById("hgs6").value;
+ let member = [
+    {name: hgs1, tier: 3},{name: hgs2, tier: 3},// tier S
+     {name:hgs3, tier: 2},{name: hgs4, tier: 2},// tier A
+      {name:hgs5, tier: 1},{name: hgs6, tier: 1},//tier B
+    ];
+    let result = [];
+    let chooseIndex;
+    let filterArr;
+	let match = [];
+	let kickoff = '';
+    while(member.length > 2) {
+    let i= 0;
+    result.push(member[i]);
+	    filterArr = member.filter(x => x.tier !== member[i].tier);
+	    let choose = this.randomArr(filterArr);
+	    result.push(choose);
+	    member = member.filter(x => x.name !== choose.name && x.name !== member[i].name);
+     i++
+    }
+    if(member[0].tier === member[1].tier) {
+    		luckyDraw();
+			} else {
+       result = result.concat(member)
+	
+	
+	result = result.filter(x => x.name);
+	console.log(result);
+
+	for (i = 0; i < result.length; i++) {
+  		kickoff = kickoff + result[i].name;
+		if(i%2===0) {kickoff += ' vs ';}
+		else {kickoff += "\n"}		
+	}
+	window.alert(kickoff + "\n" + "              " + 'Credits: kvo23 + nluong5');
+      }
+}
+
+</script>
+
+ </body>
